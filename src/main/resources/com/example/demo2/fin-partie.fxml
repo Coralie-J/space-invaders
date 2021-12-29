@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.canvas.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
 <AnchorPane fx:id="vbox" prefHeight="754.0" prefWidth="797.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Button layoutX="20.0" layoutY="576.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="130.0" fx:id="exit_button" text="Quitter" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" />
-      <Button layoutX="399.0" layoutY="180.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="165.0"  fx:id="restart_button" text="Nouvelle partie" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0" />
-      <Label layoutX="276.0" layoutY="195.0" text="Score : 1500" fx:id="score" textFill="WHITE" AnchorPane.leftAnchor="310.0" AnchorPane.topAnchor="350.0">
+      <Button fx:id="exit_button" layoutX="20.0" layoutY="576.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="130.0" text="Quitter" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" />
+      <Button fx:id="restart_button" layoutX="399.0" layoutY="180.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="165.0" text="Nouvelle partie" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0" />
+      <Label fx:id="score" layoutX="276.0" layoutY="195.0" text="Score : 1500" textFill="WHITE" AnchorPane.leftAnchor="310.0" AnchorPane.topAnchor="350.0">
          <font>
             <Font size="30.0" />
          </font>

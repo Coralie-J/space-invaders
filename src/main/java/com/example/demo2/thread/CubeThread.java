@@ -1,4 +1,4 @@
-package com.example.demo2.controller;
+package com.example.demo2.thread;
 
 import com.example.demo2.Game;
 import com.example.demo2.models.Cube3D;
@@ -29,7 +29,7 @@ public class CubeThread implements Runnable {
 
         while (translation_y.get() < 640) {
             try {
-                Thread.sleep(2000);
+                Thread.sleep(4000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

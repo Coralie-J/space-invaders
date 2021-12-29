@@ -1,28 +1,21 @@
 package com.example.demo2;
 
-import com.example.demo2.controller.CubeThread;
+import com.example.demo2.thread.CubeThread;
 import com.example.demo2.models.Cube3D;
 import com.example.demo2.models.Vaisseau;
 import javafx.animation.ScaleTransition;
-import javafx.animation.TranslateTransition;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Point2D;
 import javafx.scene.Group;
-import javafx.scene.Node;
-import javafx.scene.PointLight;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -109,6 +102,7 @@ public class Game extends Application {
         Label info = (Label) fxmlLoader.getNamespace().get("message");
         AnchorPane panneau = (AnchorPane) fxmlLoader.getNamespace().get("vbox");
 
+
         Label score = (Label) fxmlLoader.getNamespace().get("score");
         score.setText(this.score_affiche.getText());
 
@@ -124,21 +118,35 @@ public class Game extends Application {
         animation.setCycleCount(1);
         animation.play();
 
-        for (int i=1; i < 5; i++){
-            Rectangle r = new Rectangle(0,0,5, 20);
-            r.setFill(Color.LIME);
-            r.setArcWidth(10d);
-            r.setArcHeight(10d);
-            AnchorPane.setLeftAnchor(r, (double) (20*i));
-            AnchorPane.setTopAnchor(r, 20.0);
+        // Thread avec apparition de circle
 
+        /*for (int j=450; j < 500; j+=10){
+            // Circle r = new Circle(j,250,3, 10);
+            Circle r = new Circle(j,250,3);
+            r.setFill(Color.LIGHTBLUE);
+            r.setRotate(45);
             TranslateTransition transition = new TranslateTransition(Duration.millis(3000), r);
-            transition.setCycleCount(1);
-            transition.setByY(60d);
+            transition.setCycleCount(Animation.INDEFINITE);
+            transition.setByY(-400d);
+            transition.setByX(x);
             transition.play();
-
             panneau.getChildren().add(r);
         }
+
+        for (int j=400; j < 450; j+=10){
+            // Rectangle r = new Rectangle(j,250,3, 10);
+            Circle r = new Circle(j,250,3);
+            r.setFill(Color.YELLOW);
+            r.setRotate(-45);
+            TranslateTransition transition = new TranslateTransition(Duration.millis(3000), r);
+            transition.setCycleCount(Animation.INDEFINITE);
+            transition.setByY(-400d);
+            transition.setByX(-x);
+            transition.play();
+            panneau.getChildren().add(r);
+        }*/
+
+
 
         button_exit.setOnAction(actionEvent -> Platform.exit() );
 

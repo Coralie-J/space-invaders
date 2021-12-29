@@ -1,7 +1,7 @@
 package com.example.demo2.models;
 
 import com.example.demo2.Game;
-import com.example.demo2.controller.MissileThread;
+import com.example.demo2.thread.MissileThread;
 import javafx.scene.Group;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
@@ -38,8 +38,8 @@ public class Vaisseau  extends Rectangle {
         double y = this.getY();
         double x = this.getX() + this.getTranslateX() + (this.getWidth() / 2) - 3;
         Rectangle missile = new Rectangle(x, y, 5, 20);
-        missile.setArcWidth(20d);
-        missile.setArcHeight(20d);
+        missile.setArcWidth(12d);
+        missile.setArcHeight(12d);
         missile.setFill(Color.WHITE);
         group.getChildren().add(missile);
         new MissileThread(missile,group, cubes, game).start();

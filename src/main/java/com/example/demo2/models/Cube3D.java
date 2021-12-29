@@ -13,7 +13,6 @@ import javafx.util.Duration;
 public class Cube3D extends Box {
 
     protected Color couleur;
-    private TranslateTransition translation_x;
 
     public Cube3D(int w, int h, int d, int x, int y, Color color){
         super(w,h,d);
@@ -33,11 +32,11 @@ public class Cube3D extends Box {
         material.setDiffuseColor(color);
         this.setMaterial(material);
 
-        this.translation_x = new TranslateTransition(Duration.millis(2000), this);
-        this.translation_x.setCycleCount(TranslateTransition.INDEFINITE);
-        this.translation_x.setAutoReverse(true);
-        this.translation_x.setByX(100d);
-        this.translation_x.play();
+        TranslateTransition translation_x = new TranslateTransition(Duration.millis(2000), this);
+        translation_x.setCycleCount(TranslateTransition.INDEFINITE);
+        translation_x.setAutoReverse(true);
+        translation_x.setByX(100d);
+        translation_x.play();
 
         RotateTransition transition = new RotateTransition(Duration.millis(9000), this);
         transition.setCycleCount(RotateTransition.INDEFINITE);
@@ -46,10 +45,6 @@ public class Cube3D extends Box {
         transition.setByAngle(360);
         transition.play();
 
-    }
-
-    public TranslateTransition getTranslation_x() {
-        return translation_x;
     }
 
     public Color getCouleur() {
