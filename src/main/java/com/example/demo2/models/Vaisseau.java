@@ -10,7 +10,6 @@ import javafx.scene.shape.Rectangle;
 import java.util.ArrayList;
 
 
-
 public class Vaisseau  extends Rectangle {
 
     private int newX = 0;
@@ -39,9 +38,9 @@ public class Vaisseau  extends Rectangle {
         double y = this.getY();
         double x = this.getX() + this.getTranslateX() + (this.getWidth() / 2) - 3;
         Rectangle missile = new Rectangle(x, y, 5, 20);
-        missile.setArcWidth(30d);
-        missile.setArcHeight(30d);
-        missile.setFill(Color.BLACK);
+        missile.setArcWidth(20d);
+        missile.setArcHeight(20d);
+        missile.setFill(Color.WHITE);
         group.getChildren().add(missile);
         new MissileThread(missile,group, cubes, game).start();
     }

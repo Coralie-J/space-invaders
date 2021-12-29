@@ -1,17 +1,33 @@
 package com.example.demo2;
 
+import com.example.demo2.controller.CubeThread;
 import com.example.demo2.models.Cube3D;
 import com.example.demo2.models.Vaisseau;
+import javafx.animation.ScaleTransition;
+import javafx.animation.TranslateTransition;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
+import javafx.geometry.Point2D;
 import javafx.scene.Group;
+import javafx.scene.Node;
+import javafx.scene.PointLight;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 
@@ -23,7 +39,7 @@ public class Game extends Application {
     private ArrayList<Cube3D> cubes;
     private int score;
     private Stage stage;
-    private static final Color[] colors = new Color[]{Color.RED, Color.BLUE, Color.MEDIUMSPRINGGREEN , Color.SALMON, Color.VIOLET};
+    public static final Color[] colors = new Color[]{Color.RED, Color.CYAN, Color.MEDIUMSPRINGGREEN , Color.YELLOW, Color.VIOLET};
 
     @Override
     public void start(Stage stage) {
@@ -32,6 +48,8 @@ public class Game extends Application {
         this.score = 0;
         this.stage = stage;
         this.score_affiche = new Label("Score : 0");
+        this.score_affiche.setFont(new Font(20));
+        this.score_affiche.setTextFill(Color.WHITE);
         this.group = new Group(vaisseau, score_affiche);
         this.cubes = new ArrayList<>();
 
@@ -47,6 +65,7 @@ public class Game extends Application {
         }
 
         Scene scene = new Scene(group, 800, 800);
+        scene.setFill(Color.BLACK);
 
         scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
@@ -60,31 +79,73 @@ public class Game extends Application {
             }
         });
 
-        stage.setTitle("Game");
+        stage.setTitle("Space invaders");
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
-    }
-
-    public Stage getStage(){
-        return this.stage;
-    }
-
-    public ArrayList<Cube3D> getCubes() {
-        return cubes;
+        new Thread(new CubeThread(this, cubes, group)).start();
     }
 
     public void augmenteScore(Cube3D cube3D){
-        if (Color.RED.equals(cube3D.getCouleur()))
+        if (Game.colors[0].equals(cube3D.getCouleur()))
+            score += 100;
+        else if (Game.colors[1].equals(cube3D.getCouleur()))
+            score += 70;
+        else if (Game.colors[2].equals(cube3D.getCouleur()))
             score += 50;
-        else if (Color.BLUE.equals(cube3D.getCouleur()))
-            score += 40;
-        else if (Color.MEDIUMSPRINGGREEN.equals(cube3D.getCouleur()))
-            score += 30;
-        else if (Color.SALMON.equals(cube3D.getCouleur()))
+        else if (Game.colors[3].equals(cube3D.getCouleur()))
             score += 20;
         else
             score +=10;
         this.score_affiche.setText("Score : " + score);
+    }
+
+    public void finDePartie(boolean gagne) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(Game.class.getResource("fin-partie.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 800, 750);
+
+        Button button_exit = (Button) fxmlLoader.getNamespace().get("exit_button");
+        Button button_restart = (Button) fxmlLoader.getNamespace().get("restart_button");
+        Label info = (Label) fxmlLoader.getNamespace().get("message");
+        AnchorPane panneau = (AnchorPane) fxmlLoader.getNamespace().get("vbox");
+
+        Label score = (Label) fxmlLoader.getNamespace().get("score");
+        score.setText(this.score_affiche.getText());
+
+        if (gagne) {
+            info.setText("Bravo ! Vous avez gagné");
+        }
+        else
+            info.setText("Game over");
+
+        ScaleTransition animation = new ScaleTransition(Duration.millis(2000), info);
+        animation.setByX(4f);
+        animation.setByY(4f);
+        animation.setCycleCount(1);
+        animation.play();
+
+        for (int i=1; i < 5; i++){
+            Rectangle r = new Rectangle(0,0,5, 20);
+            r.setFill(Color.LIME);
+            r.setArcWidth(10d);
+            r.setArcHeight(10d);
+            AnchorPane.setLeftAnchor(r, (double) (20*i));
+            AnchorPane.setTopAnchor(r, 20.0);
+
+            TranslateTransition transition = new TranslateTransition(Duration.millis(3000), r);
+            transition.setCycleCount(1);
+            transition.setByY(60d);
+            transition.play();
+
+            panneau.getChildren().add(r);
+        }
+
+        button_exit.setOnAction(actionEvent -> Platform.exit() );
+
+        button_restart.setOnAction(actionEvent -> new Game().start(new Stage()) );
+
+        stage.setTitle("Space invaders");
+        stage.setScene(scene);
+        stage.show();
     }
 }
