@@ -13,17 +13,14 @@ import java.io.IOException;
 
 public class HelloApplication extends Application {
 
-    @FXML
-    private Button start_button;
-
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+        Scene scene = new Scene(fxmlLoader.load(), 450, 300);
         stage.setTitle("Space invaders");
         stage.setScene(scene);
 
-        start_button = (Button) fxmlLoader.getNamespace().get("start_button");
+        Button start_button = (Button) fxmlLoader.getNamespace().get("start_button");
 
         start_button.setOnAction(new EventHandler<ActionEvent>() {
             @Override

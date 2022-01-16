@@ -1,0 +1,15 @@
+.bouton:hover {
+    -fx-background-color: #0BCD97;
+}
+
+.bouton{
+    -fx-background-color: #09BC8A;
+}
+
+.bouton_quitter {
+    -fx-background-color: #A8201A;
+}
+
+.bouton_quitter:hover {
+    -fx-background-color: #BD251E;
+}

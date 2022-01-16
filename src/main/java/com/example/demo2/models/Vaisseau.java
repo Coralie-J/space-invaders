@@ -1,7 +1,7 @@
 package com.example.demo2.models;
 
 import com.example.demo2.Game;
-import com.example.demo2.controller.MissileThread;
+import com.example.demo2.thread.MissileThread;
 import javafx.scene.Group;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
@@ -10,15 +10,14 @@ import javafx.scene.shape.Rectangle;
 import java.util.ArrayList;
 
 
-
 public class Vaisseau  extends Rectangle {
 
     private int newX = 0;
 
     public Vaisseau(double width, double x, double y){
         super(x, y, width, width);
-        Image dots = new Image(String.valueOf(Game.class.getResource("img/unnamed.png")));
-        this.setFill(new ImagePattern(dots, x - width, y - width, width, width, false));
+        Image vaisseau = new Image(String.valueOf(Game.class.getResource("img/unnamed.png")));
+        this.setFill(new ImagePattern(vaisseau, x - width, y - width, width, width, false));
     }
 
     public void moveLeft(){
@@ -39,9 +38,9 @@ public class Vaisseau  extends Rectangle {
         double y = this.getY();
         double x = this.getX() + this.getTranslateX() + (this.getWidth() / 2) - 3;
         Rectangle missile = new Rectangle(x, y, 5, 20);
-        missile.setArcWidth(30d);
-        missile.setArcHeight(30d);
-        missile.setFill(Color.BLACK);
+        missile.setArcWidth(12d);
+        missile.setArcHeight(12d);
+        missile.setFill(Color.WHITE);
         group.getChildren().add(missile);
         new MissileThread(missile,group, cubes, game).start();
     }

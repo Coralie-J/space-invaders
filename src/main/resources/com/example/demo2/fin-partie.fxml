@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<?import javafx.scene.control.Button?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-    </padding>
-
-    <Label text="Bravo ! Vous avez gagné" fx:id="message"/>
-    <Button text="Recommencer une partie" fx:id="restart_button"/>
-    <Button text="Quitter" fx:id="exit_button"/>
-</VBox>
+<AnchorPane fx:id="vbox" prefHeight="754.0" prefWidth="797.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Button fx:id="exit_button" layoutX="20.0" layoutY="576.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="130.0" styleClass="bouton_quitter" stylesheets="@stylesheets/style.css" text="Quitter" textFill="white" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" />
+      <Button fx:id="restart_button" layoutX="399.0" layoutY="180.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="165.0" styleClass="bouton" stylesheets="@stylesheets/style.css" text="Nouvelle partie" textFill="white" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0" />
+      <Label fx:id="score" layoutX="276.0" layoutY="195.0" text="Score : 1500" textFill="WHITE" AnchorPane.leftAnchor="310.0" AnchorPane.topAnchor="350.0">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+      <Label fx:id="message" alignment="CENTER" layoutX="344.0" pickOnBounds="false" prefHeight="42.0" prefWidth="111.0" text="Game Over" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="344.0" AnchorPane.topAnchor="280.0" />
+   </children>
+</AnchorPane>
