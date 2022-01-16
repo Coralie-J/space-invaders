@@ -5,7 +5,6 @@ import com.example.demo2.models.Cube3D;
 import com.example.demo2.models.Vaisseau;
 import javafx.animation.ScaleTransition;
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
@@ -14,7 +13,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
@@ -32,7 +30,7 @@ public class Game extends Application {
     private ArrayList<Cube3D> cubes;
     private int score;
     private Stage stage;
-    public static final Color[] colors = new Color[]{Color.RED, Color.CYAN, Color.MEDIUMSPRINGGREEN , Color.YELLOW, Color.VIOLET};
+    private static final Color[] colors = new Color[]{Color.RED, Color.CYAN, Color.MEDIUMSPRINGGREEN , Color.YELLOW, Color.VIOLET};
 
     @Override
     public void start(Stage stage) {
@@ -94,23 +92,24 @@ public class Game extends Application {
     }
 
     public void finDePartie(boolean gagne) throws IOException {
+
         FXMLLoader fxmlLoader = new FXMLLoader(Game.class.getResource("fin-partie.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 800, 750);
 
         Button button_exit = (Button) fxmlLoader.getNamespace().get("exit_button");
         Button button_restart = (Button) fxmlLoader.getNamespace().get("restart_button");
         Label info = (Label) fxmlLoader.getNamespace().get("message");
-        AnchorPane panneau = (AnchorPane) fxmlLoader.getNamespace().get("vbox");
-
-
         Label score = (Label) fxmlLoader.getNamespace().get("score");
         score.setText(this.score_affiche.getText());
 
         if (gagne) {
-            info.setText("Bravo ! Vous avez gagné");
+            info.setText("Bravo !");
+            info.setTextFill(Color.MEDIUMSPRINGGREEN);
         }
-        else
+        else {
             info.setText("Game over");
+            info.setTextFill(Color.RED);
+        }
 
         ScaleTransition animation = new ScaleTransition(Duration.millis(2000), info);
         animation.setByX(4f);
@@ -118,39 +117,8 @@ public class Game extends Application {
         animation.setCycleCount(1);
         animation.play();
 
-        // Thread avec apparition de circle
-
-        /*for (int j=450; j < 500; j+=10){
-            // Circle r = new Circle(j,250,3, 10);
-            Circle r = new Circle(j,250,3);
-            r.setFill(Color.LIGHTBLUE);
-            r.setRotate(45);
-            TranslateTransition transition = new TranslateTransition(Duration.millis(3000), r);
-            transition.setCycleCount(Animation.INDEFINITE);
-            transition.setByY(-400d);
-            transition.setByX(x);
-            transition.play();
-            panneau.getChildren().add(r);
-        }
-
-        for (int j=400; j < 450; j+=10){
-            // Rectangle r = new Rectangle(j,250,3, 10);
-            Circle r = new Circle(j,250,3);
-            r.setFill(Color.YELLOW);
-            r.setRotate(-45);
-            TranslateTransition transition = new TranslateTransition(Duration.millis(3000), r);
-            transition.setCycleCount(Animation.INDEFINITE);
-            transition.setByY(-400d);
-            transition.setByX(-x);
-            transition.play();
-            panneau.getChildren().add(r);
-        }*/
-
-
-
-        button_exit.setOnAction(actionEvent -> Platform.exit() );
-
-        button_restart.setOnAction(actionEvent -> new Game().start(new Stage()) );
+        button_exit.setOnAction(actionEvent -> System.exit(0));
+        button_restart.setOnAction(actionEvent -> new Game().start(new Stage()));
 
         stage.setTitle("Space invaders");
         stage.setScene(scene);

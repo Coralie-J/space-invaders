@@ -22,7 +22,7 @@
           </VBox.margin>
 
     </Label>
-    <Button fx:id="start_button" prefHeight="43.0" prefWidth="223.0" text="Commencer une partie">
+    <Button fx:id="start_button" depthTest="ENABLE" prefHeight="43.0" prefWidth="223.0" styleClass="bouton" stylesheets="@stylesheets/style.css" text="Commencer une partie" textAlignment="CENTER" textFill="white">
       <font>
          <Font size="14.0" />
       </font></Button>

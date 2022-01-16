@@ -16,8 +16,8 @@ public class Vaisseau  extends Rectangle {
 
     public Vaisseau(double width, double x, double y){
         super(x, y, width, width);
-        Image dots = new Image(String.valueOf(Game.class.getResource("img/unnamed.png")));
-        this.setFill(new ImagePattern(dots, x - width, y - width, width, width, false));
+        Image vaisseau = new Image(String.valueOf(Game.class.getResource("img/unnamed.png")));
+        this.setFill(new ImagePattern(vaisseau, x - width, y - width, width, width, false));
     }
 
     public void moveLeft(){

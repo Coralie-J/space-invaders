@@ -18,12 +18,15 @@ public class MissileThread extends Thread {
     private Group group;
     private ArrayList<Cube3D> cubes;
     private Game game;
+    private static int nb_threads = 1;
 
     public MissileThread(Rectangle m, Group group, ArrayList<Cube3D> cubes, Game game){
         this.cubes = cubes;
         this.missile = m;
         this.game = game;
         this.group = group;
+        this.setName("Missile_Thread " + nb_threads);
+        nb_threads++;
     }
 
     @Override

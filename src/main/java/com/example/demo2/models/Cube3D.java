@@ -17,14 +17,8 @@ public class Cube3D extends Box {
     public Cube3D(int w, int h, int d, int x, int y, Color color){
         super(w,h,d);
         this.couleur = color;
+        this.setRotate(50d);
 
-        Rotate rxBox = new Rotate(0, 0, 0, 0, Rotate.X_AXIS);
-        Rotate ryBox = new Rotate(0, 0, 0, 0, Rotate.Y_AXIS);
-        Rotate rzBox = new Rotate(0, 0, 0, 0, Rotate.Z_AXIS);
-        rxBox.setAngle(0);
-        ryBox.setAngle(50);
-        rzBox.setAngle(30);
-        this.getTransforms().addAll(rxBox, ryBox, rzBox);
         this.setTranslateX(x);
         this.setTranslateY(y);
 
